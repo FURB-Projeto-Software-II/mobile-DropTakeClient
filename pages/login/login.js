@@ -1,10 +1,11 @@
 import React, { Component } from 'react'
 import { StyleSheet } from 'react-native';
-import { Layout } from '@ui-kitten/components';
+import { Layout, Text } from '@ui-kitten/components';
 import { Actions } from 'react-native-router-flux'
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { Input, Button } from '@ui-kitten/components';
+import { FontAwesome5 } from 'expo-vector-icons'
 
 import { emailChange, passwordChange, executeLogin } from './actions'
 
@@ -21,9 +22,12 @@ class Login extends Component {
         
         return (
         <Layout style={styles.container}>
+            <Layout style={styles.logobox}>
+                <FontAwesome5 style={styles.layout}name="parachute-box" size="100"  color="white"/>
+                <Text style={styles.logotext}>Drop&Take</Text>
+            </Layout>
             <Layout level='4' style={styles.layout}>
                 <Input
-                    label="Email"
                     placeholder='Email'
                     value={this.props.email}
                     onChange={emailChange}
@@ -31,7 +35,6 @@ class Login extends Component {
             </Layout>
             <Layout level='4' style={styles.layout}>
                 <Input
-                    label="Senha"
                     placeholder='Senha'
                     value={this.props.password}
                     type="password"
@@ -39,8 +42,12 @@ class Login extends Component {
                     onChange={passwordChange}
                 />
             </Layout>
-            <Button onPress={executeLogin} style={styles.button}>
+            <Button onPress={() => Actions.home()} style={styles.button}>
                 LOGIN
+            </Button>
+
+            <Button onPress={() => Actions.signin()} style={styles.inverseButton}>
+                <Text style={styles.inverseText}>SIGN IN</Text>
             </Button>
         </Layout>
         )
@@ -61,8 +68,20 @@ const styles = StyleSheet.create({
         backgroundColor: '#6B26A0',
         flexDirection: 'column',
         alignItems: 'stretch',
-        paddingTop: 200,
+        paddingTop: 150,
         height: '100%'
+    },
+    logobox:{
+        backgroundColor: '#6B26A0',
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent:'center',
+        marginBottom: 15
+    },
+    logotext:{
+        color: 'white',
+        fontWeight: 'bold',
+        fontSize: 40,
     },
     layout: {
         alignItems: 'center',
@@ -78,5 +97,16 @@ const styles = StyleSheet.create({
         marginBottom: 15,
         backgroundColor: 'transparent',
         borderColor: 'white'
+    },
+    inverseButton: {
+        marginTop: 15,
+        marginLeft: 15,
+        marginRight: 15,
+        marginBottom: 15,
+        backgroundColor: 'white',
+    },
+    inverseText: {
+        color: '#6B26A0',
+        fontWeight: 'bold'
     }
   });

@@ -13,6 +13,8 @@ import Signin from './pages/signin/signin'
 import OrdersList from './pages/orders-list/orders-list'
 import OrderCrud from './pages/order-crud/order-crud'
 import StorageFind from './pages/order-find-storage/order-find-storage'
+import AddressCrud from './pages/address-crud/address-crud'
+import Home from './pages/home/home'
 import reducers from './reducers'
 
 const store = applyMiddleware(thunk, multi, promise)(createStore)(reducers)
@@ -29,7 +31,7 @@ export default function App() {
               component={Login}
               title="Login"
               hideNavBar="true"
-              
+              initial
             />
 
             <Scene 
@@ -51,11 +53,27 @@ export default function App() {
               title="Order"
               
             />
+
             <Scene 
               key="storageFind"
               component={StorageFind}
               title="Find Storage"
-              initial
+              
+            />
+
+            <Scene 
+              key="addressCrud"
+              component={AddressCrud}
+              title="Address"
+              
+            />
+
+            <Scene 
+              key="home"
+              component={Home}
+              title="Home"
+              hideNavBar="true"
+              
             />
           </Scene>
         </Router>
