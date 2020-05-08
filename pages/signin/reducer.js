@@ -21,8 +21,8 @@ export default (state = INITIAL_STATE, action) => {
             return {...state, senha: action.payload}
         case 'CONFIRMA_SENHA_VALUE_CHANGE':
             return {...state, confirmarSenha: action.payload}
-        case 'EXECUTE_SIGNIN':
-            return state
+        case 'SIGN_UP_EXECUTED':
+            return state 
         default:
             return state
     }

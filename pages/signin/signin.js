@@ -4,13 +4,13 @@ import { Layout, Input, Button } from '@ui-kitten/components';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
-import { nomeChange, dataNascimentoChange, emailChange, confirmaEmailChange, senhaChange, confirmarSenhaChange, executeSignin } from './actions'
+import { nomeChange, dataNascimentoChange, emailChange, confirmaEmailChange, senhaChange, confirmarSenhaChange, validateSignup } from './actions'
 
 class Signin extends Component {
 
     render() {
 
-        const { executeSignin } = this.props
+        const { nome, dataNascimento, email, confirmaEmail, senha, confirmarSenha } = this.props
 
         return (
             <Layout style={styles.container}>
@@ -18,7 +18,7 @@ class Signin extends Component {
                     <Input
                         label="Nome"
                         placeholder='Nome'
-                        value={this.props.nome}
+                        value={nome}
                         onChange={nomeChange}
                     />
                 </Layout>
@@ -26,7 +26,7 @@ class Signin extends Component {
                     <Input
                         label="Data de Nascimento"
                         placeholder='Data de Nascimento'
-                        value={this.props.dataNascimento}
+                        value={dataNascimento}
                         onChange={dataNascimentoChange}
                     />
                 </Layout>
@@ -34,7 +34,7 @@ class Signin extends Component {
                     <Input
                         label="Email"
                         placeholder='Email'
-                        value={this.props.email}
+                        value={email}
                         onChange={emailChange}
                     />
                 </Layout>
@@ -42,7 +42,7 @@ class Signin extends Component {
                     <Input
                         label="Confirme o Email"
                         placeholder='Confirme o Email'
-                        value={this.props.confirmaEmail}
+                        value={confirmaEmail}
                         onChange={confirmaEmailChange}
                     />
                 </Layout>
@@ -50,7 +50,8 @@ class Signin extends Component {
                     <Input
                         label="Senha"
                         placeholder='Senha'
-                        value={this.props.senha}
+                        value={senha}
+                        type="password"
                         onChange={senhaChange}
                     />
                 </Layout>
@@ -58,11 +59,12 @@ class Signin extends Component {
                     <Input
                         label="Confirme a Senha"
                         placeholder='Confirmar a Senha'
-                        value={this.props.confirmarSenha}
+                        value={confirmarSenha}
+                        type="password"
                         onChange={confirmarSenhaChange}
                     />
                 </Layout>
-                <Button onPress={executeSignin} style={styles.button}>
+                <Button onPress={validateSignup} style={styles.button}>
                     CADASTRAR
                 </Button>
             </Layout>
@@ -73,15 +75,15 @@ class Signin extends Component {
 }
 
 const mapStateToProps = state => ({
-    nome: state.signin.nome,
-    dataNascimento: state.signin.dataNascimento,
-    email: state.signin.email,
-    confirmaEmail: state.signin.confirmaEmail,
-    senha: state.signin.senha,
-    confirmarSenha: state.signin.confirmarSenha
+    nome: state.signup.nome,
+    dataNascimento: state.signup.dataNascimento,
+    email: state.signup.email,
+    confirmaEmail: state.signup.confirmaEmail,
+    senha: state.signup.senha,
+    confirmarSenha: state.signup.confirmarSenha
 })
 
-const mapDispatchToProps = dispatch => bindActionCreators({ nomeChange, dataNascimentoChange, emailChange, confirmaEmailChange, senhaChange, confirmarSenhaChange, executeSignin }, dispatch)
+const mapDispatchToProps = dispatch => bindActionCreators({ nomeChange, dataNascimentoChange, emailChange, confirmaEmailChange, senhaChange, confirmarSenhaChange, validateSignup }, dispatch)
 
 export default connect(mapStateToProps, mapDispatchToProps)(Signin)
 

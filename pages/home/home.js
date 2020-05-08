@@ -5,6 +5,7 @@ import MapView from 'react-native-maps';
 import { Layout, Text, Divider, Button, Card, View } from '@ui-kitten/components';
 import { bindActionCreators } from 'redux';
 import { Actions } from 'react-native-router-flux'
+import { FontAwesome } from 'expo-vector-icons'
 
 class Home extends Component {
 
@@ -13,9 +14,13 @@ class Home extends Component {
             <>
                 <Layout style={styles.containerUp}>
                     <MapView style={styles.mapStyle} >
-                    <Button style={styles.button} onPress={() => Actions.orderCrud()}>
-                        <Text style={styles.buttonText}>NOVO PEDIDO</Text>
-                    </Button>
+                        <Button style={styles.button} onPress={() => Actions.orderCrud()}>
+                            <Text style={styles.buttonText}>NOVO PEDIDO</Text>
+                        </Button>
+
+                        <Button style={styles.configButton} onPress={() => Actions.configs()}>
+                            <FontAwesome name="gear" size={21} color="black" />
+                        </Button>
                     </MapView>
                 </Layout>
                 <Layout style={styles.containerDown}>
@@ -24,12 +29,12 @@ class Home extends Component {
                     </Layout>
                     <Divider style={styles.divider}/>
                     <Layout style={styles.orderList}>
-                        <Card style={styles.orderCard}>
+                        <Card style={styles.orderCard} onPress={() => Actions.orderInfo()}>
                             <Text category="label" style={styles.orderCardTitle}>TV Samgung</Text>
                             <Text>Entrega para José Affonso - Rua Arthur Schreiber, 71 - Velha, Blumenau - SC</Text>
                             <Text style={styles.orderCardStatus}>Pronto para retirada</Text>
                         </Card>
-                        <Card style={styles.orderCard}>
+                        <Card style={styles.orderCard} onPress={() => Actions.orderInfo()}>
                             <Text category="label" style={styles.orderCardTitle}>TV Samgung</Text>
                             <Text>Entrega para José Affonso - Rua Arthur Schreiber, 71 - Velha, Blumenau - SC</Text>
                             <Text style={styles.orderCardStatus}>Pronto para retirada</Text>
@@ -112,5 +117,15 @@ const styles = StyleSheet.create({
     mapStyle: {
         width: '100%',
         height: '100%',
-      },
+    },
+    configButton: {
+        flexDirection: 'row-reverse',
+        backgroundColor: 'white',
+        borderColor: 'transparent',
+        height: 60,
+        width: 60,
+        top: '45%',
+        left: '90%',
+        borderRadius: 50
+    }
 })

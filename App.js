@@ -15,7 +15,13 @@ import OrderCrud from './pages/order-crud/order-crud'
 import StorageFind from './pages/order-find-storage/order-find-storage'
 import AddressCrud from './pages/address-crud/address-crud'
 import Home from './pages/home/home'
+import OrderInfo from './pages/order-info/order-info'
+import Configs from './pages/configs/configs'
+import StorageProfile from './pages/storage-profile/storage-profile'
+import AddressList from './pages/address-list/address-list'
+import PaymentMethodsList from './pages/payment-methods-list/payment-methods-list'
 import reducers from './reducers'
+import orderInfo from './pages/order-info/order-info';
 
 const store = applyMiddleware(thunk, multi, promise)(createStore)(reducers)
 
@@ -74,6 +80,38 @@ export default function App() {
               title="Home"
               hideNavBar="true"
               
+            />
+
+            <Scene 
+              key="orderInfo"
+              component={OrderInfo}
+              title="Order Info"
+                
+            />
+
+            <Scene 
+              key="configs"
+              component={Configs}
+              title="Configurations"
+            />
+
+            <Scene
+              key="storageProfile"
+              component={StorageProfile}
+              title="Storage Profile"
+            />
+
+            <Scene
+              key="addressList"
+              component={AddressList}
+              title="Address List"
+              
+            />
+
+            <Scene
+              key="paymentMethodsList"
+              component={PaymentMethodsList}
+              title="Payment Methods List"
             />
           </Scene>
         </Router>

@@ -23,7 +23,7 @@ class Login extends Component {
         return (
         <Layout style={styles.container}>
             <Layout style={styles.logobox}>
-                <FontAwesome5 style={styles.layout} name="parachute-box" size="100"  color="white"/>
+                <FontAwesome5 style={styles.layout} name="parachute-box" size={100}  color="white"/>
                 <Text style={styles.logotext}>Drop&Take</Text>
             </Layout>
             <Layout level='4' style={styles.layout}>

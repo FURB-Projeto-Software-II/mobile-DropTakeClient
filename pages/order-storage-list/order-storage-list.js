@@ -3,6 +3,7 @@ import { StyleSheet } from 'react-native';
 import { Layout, List, Divider, ListItem  } from '@ui-kitten/components';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import { Actions } from 'react-native-router-flux';
 
 const data = new Array(8).fill({
     title: 'Item',
@@ -13,8 +14,9 @@ class StorageList extends Component {
 
     renderItem = ({ item, index }) => (
         <ListItem
-          title={`${item.title} ${index + 1}`}
-          description={`${item.description} ${index + 1}`}
+            onPress={() => Actions.storageProfile()}
+            title={`${item.title} ${index + 1}`}
+            description={`${item.description} ${index + 1}`}
         />
     );
 
