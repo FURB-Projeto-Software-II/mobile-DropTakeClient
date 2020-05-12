@@ -11,55 +11,55 @@ import { emailChange, passwordChange, executeLogin } from './actions'
 
 class Login extends Component {
 
-    constructor(props){
+    constructor(props) {
         super(props)
     }
 
-    
+
     render() {
-        
-        const {emailChange, passwordChange, executeLogin} = this.props
-        
+
+        const { emailChange, passwordChange, executeLogin } = this.props
+
         return (
-        <Layout style={styles.container}>
-            <Layout style={styles.logobox}>
-                <FontAwesome5 style={styles.layout} name="parachute-box" size={100}  color="white"/>
-                <Text style={styles.logotext}>Drop&Take</Text>
-            </Layout>
-            <Layout level='4' style={styles.layout}>
-                <Input
-                    placeholder='Email'
-                    value={this.props.email}
-                    onChange={emailChange}
-                />
-            </Layout>
-            <Layout level='4' style={styles.layout}>
-                <Input
-                    placeholder='Senha'
-                    value={this.props.password}
-                    type="password"
-                    secureTextEntry="true"
-                    onChange={passwordChange}
-                />
-            </Layout>
-            <Button onPress={() => Actions.home()} style={styles.button}>
-                LOGIN
+            <Layout style={styles.container}>
+                <Layout style={styles.logobox}>
+                    <FontAwesome5 style={styles.layout} name="parachute-box" size={100} color="white" />
+                    <Text style={styles.logotext}>Drop&Take</Text>
+                </Layout>
+                <Layout level='4' style={styles.layout}>
+                    <Input
+                        placeholder='Email'
+                        value={this.props.email}
+                        onChange={emailChange}
+                    />
+                </Layout>
+                <Layout level='4' style={styles.layout}>
+                    <Input
+                        placeholder='Senha'
+                        value={this.props.password}
+                        type="password"
+                        secureTextEntry={true}
+                        onChange={passwordChange}
+                    />
+                </Layout>
+                <Button onPress={() => Actions.home()} style={styles.button}>
+                    LOGIN
             </Button>
 
-            <Button onPress={() => Actions.signin()} style={styles.inverseButton}>
-                <Text style={styles.inverseText}>SIGN IN</Text>
-            </Button>
-        </Layout>
+                <Button onPress={() => Actions.signin()} style={styles.inverseButton}>
+                    <Text style={styles.inverseText}>SIGN IN</Text>
+                </Button>
+            </Layout>
         )
     }
 }
 
 const mapStateToProps = state => ({
-    email: state.login.email, 
+    email: state.login.email,
     password: state.login.password
 })
 
-const mapDispatchToProps = dispatch => bindActionCreators({ emailChange, passwordChange, executeLogin}, dispatch)
+const mapDispatchToProps = dispatch => bindActionCreators({ emailChange, passwordChange, executeLogin }, dispatch)
 
 export default connect(mapStateToProps, mapDispatchToProps)(Login)
 
@@ -71,14 +71,14 @@ const styles = StyleSheet.create({
         paddingTop: 150,
         height: '100%'
     },
-    logobox:{
+    logobox: {
         backgroundColor: '#6B26A0',
         flexDirection: 'row',
         alignItems: 'center',
-        justifyContent:'center',
+        justifyContent: 'center',
         marginBottom: 15
     },
-    logotext:{
+    logotext: {
         color: 'white',
         fontWeight: 'bold',
         fontSize: 40,
@@ -109,4 +109,4 @@ const styles = StyleSheet.create({
         color: '#6B26A0',
         fontWeight: 'bold'
     }
-  });
+});
