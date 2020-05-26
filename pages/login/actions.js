@@ -1,13 +1,39 @@
+import axios from "axios"
+import { Actions } from "react-native-router-flux"
+import { Alert } from "react-native"
+import api from '../../config/services-config'
+
 export const emailChange = event => ({
     type: 'EMAIL_VALUE_CHANGE',
-    payload: event.target.value
+    payload: event.nativeEvent.text
 })
 
 export const passwordChange = event => ({
     type: 'PASSWORD_VALUE_CHANGE',
-    payload: event.target.value
+    payload: event.nativeEvent.text
 })
 
-export const executeLogin = () => ({
-    type: 'EXECUTE_LOGIN'
-})
+export const executeLogin = () => {
+    return (dispatch, getState) => {
+
+        const email = getState().login.email
+        const password = getState().login.password
+
+        api.post(`/auth/login`, { email, password })
+        .then(result => {
+            if (result.data.auth === true) {
+                Actions.home()
+
+                return dispatch({
+                    type: 'EXECUTE_LOGIN',
+                    payload: result.data.token
+                })
+            }
+            
+        }).catch(error => {
+            Alert.alert(error.response.data)
+        })
+
+    }
+    
+}

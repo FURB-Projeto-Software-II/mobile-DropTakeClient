@@ -30,7 +30,7 @@ class Login extends Component {
                     <Input
                         placeholder='Email'
                         value={this.props.email}
-                        onChange={emailChange}
+                        onChange={e => emailChange(e)}
                     />
                 </Layout>
                 <Layout level='4' style={styles.layout}>
@@ -39,10 +39,10 @@ class Login extends Component {
                         value={this.props.password}
                         type="password"
                         secureTextEntry={true}
-                        onChange={passwordChange}
+                        onChange={e => passwordChange(e)}
                     />
                 </Layout>
-                <Button onPress={() => Actions.home()} style={styles.button}>
+                <Button onPress={executeLogin} style={styles.button}>
                     LOGIN
             </Button>
 

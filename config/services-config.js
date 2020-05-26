@@ -1,3 +1,3 @@
 export const properties = {
-    apiURL: 'http://localhost:3001'
+    apiURL: 'https://drop-and-take.herokuapp.com'
 };

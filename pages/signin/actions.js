@@ -2,32 +2,32 @@ import api from '../../server/api'
 
 export const nomeChange = event => ({
     type: 'NOME_VALUE_CHANGE',
-    payload: event.target.value
+    payload: event.nativeEvent.text
 })
 
 export const dataNascimentoChange = event => ({
     type: 'DATA_NASCIMENTO_VALUE_CHANGE',
-    payload: event.target.value
+    payload: event.nativeEvent.text
 })
 
 export const emailChange = event => ({
     type: 'EMAIL_VALUE_CHANGE',
-    payload: event.target.value
+    payload: event.nativeEvent.text
 })
 
 export const confirmaEmailChange = event => ({
     type: 'CONFIRMA_EMAIL_VALUE_CHANGE',
-    payload: event.target.value
+    payload: event.nativeEvent.text
 })
 
 export const senhaChange = event => ({
     type: 'SENHA_VALUE_CHANGE',
-    payload: event.target.value
+    payload: event.nativeEvent.text
 })
 
 export const confirmarSenhaChange = event => ({
     type: 'CONFIRMA_SENHA_VALUE_CHANGE',
-    payload: event.target.value
+    payload: event.nativeEvent.text
 })
 
 export const validateSignup = () => {
@@ -42,7 +42,7 @@ export const validateSignup = () => {
             })
         }
     
-        if (getState().signup.confirmaEmail !== getState().signup.confirmarSenha) {
+        if (getState().signup.email !== getState().signup.confirmaEmail) {
             valid = false
             dispatch({
                 type: 'DIFFERENT_EMAIL',
@@ -60,14 +60,14 @@ export const validateSignup = () => {
 
 export const executeSignup = () => {
     return (dispatch, getState) => {
-        api.post('/auth/register', {
+        api.post('/auth/client/register', {
             nome: getState().signup.nome,
             email: getState().signup.email,
             password: getState().signup.senha
         })
         .then(resp => dispatch({
             type: 'SIGN_UP_EXECUTED',
-            payload: resp.data
+            payload: resp.data.token
         }))
     }
 }

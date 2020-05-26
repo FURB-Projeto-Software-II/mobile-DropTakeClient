@@ -10,7 +10,7 @@ class Signin extends Component {
 
     render() {
 
-        const { nome, dataNascimento, email, confirmaEmail, senha, confirmarSenha } = this.props
+        const { nomeChange, dataNascimentoChange, emailChange, confirmaEmailChange, senhaChange, confirmarSenhaChange, validateSignup } = this.props
 
         return (
             <Layout style={styles.container}>
@@ -18,50 +18,50 @@ class Signin extends Component {
                     <Input
                         label="Nome"
                         placeholder='Nome'
-                        value={nome}
-                        onChange={nomeChange}
+                        value={this.props.nome}
+                        onChange={e => nomeChange(e)}
                     />
                 </Layout>
-                <Layout level='4' style={styles.layout}>
+                {/* <Layout level='4' style={styles.layout}>
                     <Input
                         label="Data de Nascimento"
                         placeholder='Data de Nascimento'
-                        value={dataNascimento}
-                        onChange={dataNascimentoChange}
+                        value={this.props.dataNascimento}
+                        onChange={e => dataNascimentoChange(e)}
                     />
-                </Layout>
+                </Layout> */}
                 <Layout level='4' style={styles.layout}>
                     <Input
                         label="Email"
                         placeholder='Email'
-                        value={email}
-                        onChange={emailChange}
+                        value={this.props.email}
+                        onChange={e => emailChange(e)}
                     />
                 </Layout>
                 <Layout level='4' style={styles.layout}>
                     <Input
                         label="Confirme o Email"
                         placeholder='Confirme o Email'
-                        value={confirmaEmail}
-                        onChange={confirmaEmailChange}
+                        value={this.props.confirmaEmail}
+                        onChange={e =>confirmaEmailChange(e)}
                     />
                 </Layout>
                 <Layout level='4' style={styles.layout}>
                     <Input
                         label="Senha"
                         placeholder='Senha'
-                        value={senha}
+                        value={this.props.senha}
                         type="password"
-                        onChange={senhaChange}
+                        onChange={e =>senhaChange(e)}
                     />
                 </Layout>
                 <Layout level='4' style={styles.layout}>
                     <Input
                         label="Confirme a Senha"
                         placeholder='Confirmar a Senha'
-                        value={confirmarSenha}
+                        value={this.props.confirmarSenha}
                         type="password"
-                        onChange={confirmarSenhaChange}
+                        onChange={e => confirmarSenhaChange(e)}
                     />
                 </Layout>
                 <Button onPress={validateSignup} style={styles.button}>
