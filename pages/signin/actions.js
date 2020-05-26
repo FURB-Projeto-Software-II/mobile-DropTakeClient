@@ -1,4 +1,5 @@
 import api from '../../server/api'
+import { Alert } from 'react-native'
 
 export const nomeChange = event => ({
     type: 'NOME_VALUE_CHANGE',
@@ -52,6 +53,8 @@ export const validateSignup = () => {
     
         if (valid) {
             dispatch(executeSignup())
+        } else {
+            Alert.alert("Email e ou senha não conferem.")
         }
 
     }
@@ -65,9 +68,18 @@ export const executeSignup = () => {
             email: getState().signup.email,
             password: getState().signup.senha
         })
-        .then(resp => dispatch({
-            type: 'SIGN_UP_EXECUTED',
-            payload: resp.data.token
-        }))
+        .then(result => {
+            if (result.data.auth === true) {
+                Actions.home()
+
+                return dispatch({
+                    type: 'SIGN_UP_EXECUTED',
+                    payload: result.data.token
+                })
+            }
+            
+        }).catch(error => {
+            Alert.alert(error.response.data)
+        })
     }
 }
