@@ -10,6 +10,9 @@ import { zipcodeChange, estadoChange,  cidadeChange, neighborhoodChange, streetC
 class AddressCrud extends Component {
 
     render() {
+
+        const { zipcodeChange, estadoChange, cidadeChange, neighborhoodChange, streetChange, numberChange, complementChange, executeCadastrar } = this.props
+
         return (
             <Layout>
                 <Layout style={[styles.layout, styles.marginTop]}>
@@ -17,12 +20,12 @@ class AddressCrud extends Component {
                         label="CEP"
                         placeholder='CEP'
                         value={this.props.zipcode}
-                        onChangeText={zipcodeChange}
+                        onChangeText={e => zipcodeChange(e)}
                     />
                 </Layout>
 
                 <Layout style={styles.layout}>
-                    <Select selectedIndex={this.props.estado} onSelect={estadoChange} label="Estado">
+                    <Select selectedIndex={this.props.estado} onSelect={e => estadoChange(e)} label="Estado">
                         <SelectItem title='Acre'/>
                         <SelectItem title='Alagoas'/>
                         <SelectItem title='Amapá'/>
@@ -58,7 +61,7 @@ class AddressCrud extends Component {
                         label="Cidade"
                         placeholder='Cidade'
                         value={this.props.cidade}
-                        onChangeText={cidadeChange}
+                        onChangeText={e => cidadeChange(e)}
                     />
                 </Layout>
 
@@ -67,7 +70,7 @@ class AddressCrud extends Component {
                         label="Bairro"
                         placeholder='Bairro'
                         value={this.props.neighborhood}
-                        onChangeText={neighborhoodChange}
+                        onChangeText={e => neighborhoodChange(e)}
                     />
                 </Layout>
 
@@ -76,7 +79,7 @@ class AddressCrud extends Component {
                         label="Rua"
                         placeholder='Rua'
                         value={this.props.street}
-                        onChangeText={streetChange}
+                        onChangeText={e => streetChange(e)}
                     />
                 </Layout>
 
@@ -85,7 +88,7 @@ class AddressCrud extends Component {
                         label="Número"
                         placeholder='Número'
                         value={this.props.number}
-                        onChangeText={numberChange}
+                        onChangeText={e => numberChange(e)}
                     />
                 </Layout>
 
@@ -94,7 +97,7 @@ class AddressCrud extends Component {
                         label="Complemento"
                         placeholder='Complemento'
                         value={this.props.complement}
-                        onChangeText={complementChange}
+                        onChangeText={e => complementChange(e)}
                     />
                 </Layout>
 

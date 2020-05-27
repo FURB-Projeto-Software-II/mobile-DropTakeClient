@@ -1,7 +1,7 @@
 import axios from "axios"
 import { Actions } from "react-native-router-flux"
 import { Alert } from "react-native"
-import api from '../../config/services-config'
+import api from '../../server/api'
 
 export const emailChange = event => ({
     type: 'EMAIL_VALUE_CHANGE',
