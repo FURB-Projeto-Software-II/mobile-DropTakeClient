@@ -5,6 +5,8 @@ import ordersListReducer from './pages/orders-list/reducer'
 import orderCrudReducer from './pages/order-crud/reducer'
 import addressCrudReducer from './pages/address-crud/reducer'
 import homeReducer from './pages/home/reducer'
+import addressListReducer from './pages/address-list/reducer'
+import orderStoreListReducer from './pages/order-storage-list/reducer'
 
 const rootReducer = combineReducers({
     login: loginReducer,
@@ -12,7 +14,9 @@ const rootReducer = combineReducers({
     ordersList: ordersListReducer,
     orderCrud: orderCrudReducer,
     addressCrud:  addressCrudReducer,
+    addressList: addressListReducer,
     home: homeReducer,
+    orderStoreList: orderStoreListReducer
 })
 
 export default rootReducer

@@ -4,26 +4,30 @@ import { Layout, List, Divider, ListItem  } from '@ui-kitten/components';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
-const data = new Array(8).fill({
-    title: 'Item',
-    description: 'Description for Item',
-  });
+import { search } from './actions'
 
 class OrdersList extends Component {
 
+    componentDidMount() {
+        this.props.search()
+    }
+
     renderItem = ({ item, index }) => (
         <ListItem
-          title={`${item.title} ${index + 1}`}
-          description={`${item.description} ${index + 1}`}
+          title={`${item.description} ${index + 1}`}
+          description=''
         />
     );
 
     render() {
+
+        const { list } = this.props
+
         return(
             <Layout>
                 <List
                     style={styles.container}
-                    data={data}
+                    data={list}
                     ItemSeparatorComponent={Divider}
                     renderItem={this.renderItem}
                 />
@@ -33,9 +37,10 @@ class OrdersList extends Component {
 }
 
 const mapStateToProps = state => ({
+    list: state.ordersList.list
 })
 
-const mapDispatchToProps = dispatch => bindActionCreators({  }, dispatch)
+const mapDispatchToProps = dispatch => bindActionCreators({ search }, dispatch)
 
 export default connect(mapStateToProps, mapDispatchToProps)(OrdersList)
 

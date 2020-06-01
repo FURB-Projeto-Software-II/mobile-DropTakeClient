@@ -5,12 +5,14 @@ import { StyleSheet } from 'react-native'
 import { Layout, Button,ListItem, List, Divider } from '@ui-kitten/components'
 import { Actions } from 'react-native-router-flux'
 
-const data = new Array(15).fill({
-    title: 'Item',
-    description: 'Description for Item',
-  });
+import { search } from './actions'
+
 
 class AddressList extends Component {
+
+    componentDidMount() {
+        this.props.search()
+    }
 
     constructor(props){
         super(props)
@@ -18,18 +20,21 @@ class AddressList extends Component {
 
     renderItem = ({ item, index }) => (
         <ListItem
-          title={`${item.title} ${index + 1}`}
-          description={`${item.description} ${index + 1}`}
+          title={`${item.street}, ${item.number}`}
+          description={`CEP: ${item.zipcode} - Bairro: ${item.neighborhood}`}
         />
     );
 
     render() {
+
+        const { list } = this.props
+
         return (
            <Layout>
                <Layout style={styles.listAddressBox}>
                     <List
                         style={styles.container}
-                        data={data}
+                        data={list}
                         ItemSeparatorComponent={Divider}
                         renderItem={this.renderItem}
                     />
@@ -46,10 +51,10 @@ class AddressList extends Component {
 }
 
 const mapStateToProps = state => ({
-
+    list: state.addressList.list
 })
 
-const mapDispatchToProps = dispatch => bindActionCreators({  }, dispatch)
+const mapDispatchToProps = dispatch => bindActionCreators({ search }, dispatch)
 
 export default connect(mapStateToProps, mapDispatchToProps)(AddressList)
 

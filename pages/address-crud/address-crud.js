@@ -20,39 +20,39 @@ class AddressCrud extends Component {
                         label="CEP"
                         placeholder='CEP'
                         value={this.props.zipcode}
-                        onChangeText={e => zipcodeChange(e)}
+                        onChange={e => zipcodeChange(e)}
                     />
                 </Layout>
 
                 <Layout style={styles.layout}>
                     <Select selectedIndex={this.props.estado} onSelect={e => estadoChange(e)} label="Estado">
-                        <SelectItem title='Acre'/>
-                        <SelectItem title='Alagoas'/>
-                        <SelectItem title='Amapá'/>
-                        <SelectItem title='Amazonas'/>
-                        <SelectItem title='Bahia'/>
-                        <SelectItem title='Ceará'/>
-                        <SelectItem title='Distrito Federal'/>
-                        <SelectItem title='Espírito Santo'/>
-                        <SelectItem title='Goiás'/>
-                        <SelectItem title='Maranhão'/>
-                        <SelectItem title='Mato Grosso'/>
-                        <SelectItem title='Mato Grosso do Sul'/>
-                        <SelectItem title='Minas Gerais'/>
-                        <SelectItem title='Paraná'/>
-                        <SelectItem title='Paraíba'/>
-                        <SelectItem title='Pará'/>
-                        <SelectItem title='Pernambuco'/>
-                        <SelectItem title='Piauí'/>
-                        <SelectItem title='Rio de Janeiro'/>
-                        <SelectItem title='Rio Grande do Norte'/>
-                        <SelectItem title='Rio Grande do Sul'/>
-                        <SelectItem title='Rondônia'/>
-                        <SelectItem title='Roraima'/>
-                        <SelectItem title='Santa Catarina'/>
-                        <SelectItem title='Sergipe'/>
-                        <SelectItem title='São Paulo'/>
-                        <SelectItem title='Tocantins'/>
+                        <SelectItem title='Acre' value="AC"/>
+                        <SelectItem title='Alagoas' value="AL"/>
+                        <SelectItem title='Amapá' value="AP"/>
+                        <SelectItem title='Amazonas' value="AM"/>
+                        <SelectItem title='Bahia' value="BA"/>
+                        <SelectItem title='Ceará' value="CE"/>
+                        <SelectItem title='Distrito Federal' value="DF"/>
+                        <SelectItem title='Espírito Santo' value="ES"/>
+                        <SelectItem title='Goiás' value="GO"/>
+                        <SelectItem title='Maranhão' value="MA"/>
+                        <SelectItem title='Mato Grosso' value="MT"/>
+                        <SelectItem title='Mato Grosso do Sul' value="MS"/>
+                        <SelectItem title='Minas Gerais' value="MG"/>
+                        <SelectItem title='Paraná' value="PR"/>
+                        <SelectItem title='Paraíba' value="PB"/>
+                        <SelectItem title='Pará' value="PA"/>
+                        <SelectItem title='Pernambuco' value="PE"/>
+                        <SelectItem title='Piauí' value="PI"/>
+                        <SelectItem title='Rio de Janeiro' value="RJ"/>
+                        <SelectItem title='Rio Grande do Norte' value="RN"/>
+                        <SelectItem title='Rio Grande do Sul' value="RS"/>
+                        <SelectItem title='Rondônia' value="RO"/>
+                        <SelectItem title='Roraima' value="RR"/>
+                        <SelectItem title='Santa Catarina' value="SC"/>
+                        <SelectItem title='Sergipe' value="SE"/>
+                        <SelectItem title='São Paulo' value="SP"/>
+                        <SelectItem title='Tocantins' value="TO"/>
                     </Select>
                 </Layout>
 
@@ -61,7 +61,7 @@ class AddressCrud extends Component {
                         label="Cidade"
                         placeholder='Cidade'
                         value={this.props.cidade}
-                        onChangeText={e => cidadeChange(e)}
+                        onChange={e => cidadeChange(e)}
                     />
                 </Layout>
 
@@ -70,7 +70,7 @@ class AddressCrud extends Component {
                         label="Bairro"
                         placeholder='Bairro'
                         value={this.props.neighborhood}
-                        onChangeText={e => neighborhoodChange(e)}
+                        onChange={e => neighborhoodChange(e)}
                     />
                 </Layout>
 
@@ -79,7 +79,7 @@ class AddressCrud extends Component {
                         label="Rua"
                         placeholder='Rua'
                         value={this.props.street}
-                        onChangeText={e => streetChange(e)}
+                        onChange={e => streetChange(e)}
                     />
                 </Layout>
 
@@ -88,7 +88,7 @@ class AddressCrud extends Component {
                         label="Número"
                         placeholder='Número'
                         value={this.props.number}
-                        onChangeText={e => numberChange(e)}
+                        onChange={e => numberChange(e)}
                     />
                 </Layout>
 
@@ -97,7 +97,7 @@ class AddressCrud extends Component {
                         label="Complemento"
                         placeholder='Complemento'
                         value={this.props.complement}
-                        onChangeText={e => complementChange(e)}
+                        onChange={e => complementChange(e)}
                     />
                 </Layout>
 

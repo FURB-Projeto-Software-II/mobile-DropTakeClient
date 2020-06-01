@@ -5,27 +5,31 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { Actions } from 'react-native-router-flux';
 
-const data = new Array(8).fill({
-    title: 'Item',
-    description: 'Description for Item',
-  });
+import { search } from './actions'
 
 class StorageList extends Component {
+
+    componentDidMount() {
+        this.props.search()
+    }
 
     renderItem = ({ item, index }) => (
         <ListItem
             onPress={() => Actions.storageProfile()}
-            title={`${item.title} ${index + 1}`}
-            description={`${item.description} ${index + 1}`}
+            title={`${item.name} ${index + 1}`}
+            description=''
         />
     );
 
     render() {
+
+        const { list } = this.props
+
         return(
             <Layout>
                 <List
                     style={styles.container}
-                    data={data}
+                    data={list}
                     ItemSeparatorComponent={Divider}
                     renderItem={this.renderItem}
                 />
@@ -35,9 +39,10 @@ class StorageList extends Component {
 }
 
 const mapStateToProps = state => ({
+    list: state.orderStoreList.list
 })
 
-const mapDispatchToProps = dispatch => bindActionCreators({  }, dispatch)
+const mapDispatchToProps = dispatch => bindActionCreators({ search }, dispatch)
 
 export default connect(mapStateToProps, mapDispatchToProps)(StorageList)
 

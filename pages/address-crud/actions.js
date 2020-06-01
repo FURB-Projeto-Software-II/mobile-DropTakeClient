@@ -1,3 +1,7 @@
+import api from '../../server/api'
+import { Alert } from 'react-native'
+import { Actions } from 'react-native-router-flux'
+
 export const zipcodeChange = event => ({
     type: 'ZIPCODE_VALUE_CHANGE',
     payload: event.nativeEvent.text
@@ -37,6 +41,12 @@ export const executeCadastrar = () => {
 
     return (dispatch, getState) => {
 
+        const config = {
+            headers: {
+                authorization: getState().login.token
+            }
+        }
+
         const zipcode = getState().addressCrud.zipcode
         const state = getState().addressCrud.estado
         const city = getState().addressCrud.cidade
@@ -53,7 +63,7 @@ export const executeCadastrar = () => {
             street,
             number,
             complement
-        })
+        }, config)
         .then(result => {
             Actions.addressList()
 
