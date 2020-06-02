@@ -9,7 +9,11 @@ import { descricaoChange,  larguraChange, alturaChange, pesoChange, categoriaCha
 
 class OrderCrud extends Component {
 
+    
     render() {
+
+        const { descricaoChange, larguraChange, alturaChange, pesoChange, entregarEmCasaChange } = this.props
+        
         return(
             <>
             <Layout>
@@ -18,7 +22,7 @@ class OrderCrud extends Component {
                         label="Descrição"
                         placeholder='Descrição'
                         value={this.props.descricao}
-                        onChangeText={descricaoChange}
+                        onChangeText={text => descricaoChange(text)}
                     />
                 </Layout>
                 <Layout style={styles.tamanho}>
@@ -26,14 +30,14 @@ class OrderCrud extends Component {
                         label="Tamanho"
                         placeholder='Largura'
                         value={this.props.largura}
-                        onChangeText={larguraChange}
+                        onChangeText={text => larguraChange(text)}
                     />
                     <Text style={styles.labelCenter}>x</Text>
                     <Input style={styles.altura}
                         label=" "
                         placeholder='Altura'
                         value={this.props.altura}
-                        onChangeText={alturaChange}
+                        onChangeText={text => alturaChange(text)}
                     />
                 </Layout>
                 <Layout style={styles.layout}>
@@ -41,7 +45,7 @@ class OrderCrud extends Component {
                         label="Peso"
                         placeholder='Peso'
                         value={this.props.peso}
-                        onChangeText={pesoChange}
+                        onChangeText={text => pesoChange(text)}
                     />
                 </Layout>
 
@@ -56,7 +60,7 @@ class OrderCrud extends Component {
                 <CheckBox
                     style={styles.layout}
                     checked={this.props.entregarEmCasa}
-                    onChange={entregarEmCasaChange}>
+                    onChange={e => entregarEmCasaChange(e)}>
                     <Text>Entregar em casa</Text>
                 </CheckBox>
 
@@ -99,6 +103,7 @@ const mapStateToProps = state => ({
     categoria: state.orderCrud.categoria,
     entregarEmCasa: state.orderCrud.entregarEmCasa,
     storageDescricao: state.orderCrud.storageDescricao,
+    storageId: state.orderStoreList.storageId,
 })
 
 const mapDispatchToProps = dispatch => bindActionCreators({ descricaoChange,  larguraChange, alturaChange, pesoChange, categoriaChange, entregarEmCasaChange, enderecoChange, openStorageSelection }, dispatch)

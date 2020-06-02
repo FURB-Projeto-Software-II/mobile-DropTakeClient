@@ -1,5 +1,6 @@
 import api from '../../server/api'
 import { Alert } from 'react-native'
+import { Actions } from 'react-native-router-flux'
 
 export const search = () => {
 
@@ -24,4 +25,14 @@ export const search = () => {
 
     }
 
+}
+
+export  const select = () => {
+    Actions.orderInfo()
+    
+    return {
+        type: 'STORAGE_SELECTED',
+        paylaod: 12
+    }
+        
 }

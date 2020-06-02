@@ -13,7 +13,7 @@ export const passwordChange = event => ({
     payload: event.nativeEvent.text
 })
 
-export const executeLogin = () => {
+export const  executeLogin = () => {
     return (dispatch, getState) => {
 
         const email = getState().login.email

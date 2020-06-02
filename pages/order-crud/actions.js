@@ -1,21 +1,21 @@
-export const descricaoChange = event => ({
+export const descricaoChange = text => ({
     type: 'DESCRICAO_VALUE_CHANGE',
-    payload: event.target.value
+    payload: text
 })
 
-export const larguraChange = event => ({
+export const larguraChange = text => ({
     type: 'LARGURA_VALUE_CHANGE',
-    payload: event.target.value
+    payload: text
 })
 
-export const alturaChange = event => ({
+export const alturaChange = text => ({
     type: 'ALTURA_VALUE_CHANGE',
-    payload: event.target.value
+    payload: text
 })
 
-export const pesoChange = event => ({
+export const pesoChange = text => ({
     type: 'PESO_VALUE_CHANGE',
-    payload: event.target.value
+    payload: text
 })
 
 export const categoriaChange = event => ({
@@ -24,8 +24,8 @@ export const categoriaChange = event => ({
 })
 
 export const entregarEmCasaChange = event => ({
-    type: 'entrega_EM_CASA_VALUE_CHANGE',
-    payload: event.target.value
+    type: 'ENTREGA_EM_CASA_VALUE_CHANGE',
+    payload: event
 })
 
 export const enderecoChange = event => ({
