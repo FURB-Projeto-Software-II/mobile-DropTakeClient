@@ -5,14 +5,44 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { Actions } from 'react-native-router-flux'
 
-import { descricaoChange,  larguraChange, alturaChange, pesoChange, categoriaChange, entregarEmCasaChange, enderecoChange, openStorageSelection } from './actions'
+import { descricaoChange,  
+    larguraChange, 
+    alturaChange, 
+    pesoChange, 
+    categoriaChange, 
+    entregarEmCasaChange, 
+    enderecoChange, 
+    openStorageSelection, 
+    executeConfirm,
+    searchAddress,
+    searchCategory
+} from './actions'
+
+import { Item, Picker, Icon } from 'native-base';
 
 class OrderCrud extends Component {
 
     
+    componentDidMount() {
+        this.props.searchAddress();
+        this.props.searchCategory();
+    }
+
     render() {
 
-        const { descricaoChange, larguraChange, alturaChange, pesoChange, entregarEmCasaChange } = this.props
+        const { descricaoChange, 
+            larguraChange, 
+            alturaChange, 
+            pesoChange, 
+            entregarEmCasaChange, 
+            enderecoChange,
+            categoriaChange,
+            executeConfirm, 
+            addressList,
+            endereco,
+            categoryList,
+            categoria
+        } = this.props
         
         return(
             <>
@@ -50,11 +80,29 @@ class OrderCrud extends Component {
                 </Layout>
 
                 <Layout style={styles.layout}>
-                    <Select selectedIndex={this.props.categoria} onSelect={categoriaChange} label="Categoria">
-                        <SelectItem title='Option 1'/>
-                        <SelectItem title='Option 2'/>
-                        <SelectItem title='Option 3'/>
-                    </Select>
+                <Item picker >
+                        <Picker
+                            label="Categoria"
+                            mode="dropdown"
+                            iosIcon={<Icon name="arrow-down" />}
+                            style={{ width: '100%' }}
+                            placeholder="Categoria"
+                            selectedValue={categoria}
+                            onValueChange={e => categoriaChange(e)}
+                        >
+                            {
+                                categoryList.map(category => {
+                                    return(
+                                        <Picker.Item 
+                                            label={`${category.name}`} 
+                                            value={category._id} 
+                                            key={category._id}
+                                        />
+                                    )
+                                })
+                            }
+                        </Picker>
+                    </Item>
                 </Layout>
 
                 <CheckBox
@@ -65,11 +113,39 @@ class OrderCrud extends Component {
                 </CheckBox>
 
                 <Layout style={styles.layout}>
-                    <Select selectedIndex={this.props.endereco} onSelect={enderecoChange} label="Endereço">
-                        <SelectItem title='Option 1'/>
-                        <SelectItem title='Option 2'/>
-                        <SelectItem title='Option 3'/>
-                    </Select>
+                    {/* <Select selectedIndex={this.props.endereco} disabled={!this.props.entregarEmCasa} onSelect={enderecoChange} label="Endereço">
+                        <SelectItem title='Selecione uma opção' value="0"/>
+                        {
+                            addressList.map(address => {
+                                return(
+                                    <SelectItem value={address._id} title={`${address.street}, ${address.number} - ${address.city}`}/>
+                                )
+                            })
+                        }
+                    </Select> */}
+                    <Item picker >
+                        <Picker enabled={this.props.entregarEmCasa}
+                            label="Endereço"
+                            mode="dropdown"
+                            iosIcon={<Icon name="arrow-down" />}
+                            style={{ width: '100%' }}
+                            placeholder="Endereço"
+                            selectedValue={endereco}
+                            onValueChange={e => enderecoChange(e)}
+                        >
+                            {
+                                addressList.map(address => {
+                                    return(
+                                        <Picker.Item 
+                                            label={`${address.street}, ${address.number} - ${address.city}`} 
+                                            value={address._id} 
+                                            key={address._id}
+                                        />
+                                    )
+                                })
+                            }
+                        </Picker>
+                    </Item>
                 </Layout>
 
                 <Button onPress={() => Actions.storageFind()} style={styles.button}>
@@ -80,12 +156,12 @@ class OrderCrud extends Component {
                     <Divider></Divider>
 
                     <Text style={styles.marginTop} category="label">Storage Selecionado</Text>
-                    <Text style={styles.marginTop}>{this.props.storageDescricao || 'Nenhum storage selecionado ainda.'}</Text>
+                    <Text style={styles.marginTop}>{this.props.storageName || 'Nenhum storage selecionado ainda.'}</Text>
                 </Layout>
 
             </Layout>
             <Layout style={styles.containerConfirm}>
-                <Button onPress={openStorageSelection} style={[styles.button, styles.cofirmButton]} size='giant'>
+                <Button onPress={executeConfirm} style={[styles.button, styles.cofirmButton]} size='giant'>
                     CONFIRMAR
                 </Button>
             </Layout>
@@ -104,9 +180,25 @@ const mapStateToProps = state => ({
     entregarEmCasa: state.orderCrud.entregarEmCasa,
     storageDescricao: state.orderCrud.storageDescricao,
     storageId: state.orderStoreList.storageId,
+    storageName: state.orderStoreList.storageName,
+    addressList: state.orderCrud.addressList,
+    endereco: state.orderCrud.endereco,
+    categoryList: state.orderCrud.categoryList,
+    categoria: state.orderCrud.categoria
 })
 
-const mapDispatchToProps = dispatch => bindActionCreators({ descricaoChange,  larguraChange, alturaChange, pesoChange, categoriaChange, entregarEmCasaChange, enderecoChange, openStorageSelection }, dispatch)
+const mapDispatchToProps = dispatch => bindActionCreators({ descricaoChange,  
+    larguraChange, 
+    alturaChange, 
+    pesoChange, 
+    categoriaChange, 
+    entregarEmCasaChange, 
+    enderecoChange, 
+    openStorageSelection, 
+    executeConfirm,
+    searchAddress,
+    searchCategory
+}, dispatch)
 
 export default connect(mapStateToProps, mapDispatchToProps)(OrderCrud)
 

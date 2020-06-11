@@ -23,8 +23,7 @@ class OrderFindStorage extends Component {
 
     render() {
         return(
-            <Router>
-                <Scene key="root" hideNavBar="true">
+                <Scene key="op" hideNavBar="true">
                     <Scene key="tabbar" tabs tabBarStyle={{backgroundColor: '#FFF'}} hideNavBar="true">
                         <Scene key="map-tab" title="Map" icon={MapIcon}>
                             <Scene 
@@ -42,7 +41,6 @@ class OrderFindStorage extends Component {
                         </Scene>
                     </Scene>
                 </Scene>
-            </Router>
         )
     }
 

@@ -3,15 +3,19 @@ const INITIAL_STATE = {
     largura: '',
     altura: '',
     peso: '',
-    categoria: '',
+    categoria: undefined,
     entregarEmCasa: false,
-    endereco: -1,
+    endereco: undefined,
     storage: -1,
-    storageDescricao: ''
+    storageDescricao: '',
+    addressList: [],
+    categoryList: []
 }
 
 export default (state = INITIAL_STATE, action) => {
     switch(action.type) {
+        case 'ENDERECO_VALUE_CHANGE':
+            return {...state, endereco: action.payload}
         case 'DESCRICAO_VALUE_CHANGE':
             return {...state, descricao: action.payload}
         case 'LARGURA_VALUE_CHANGE':
@@ -24,10 +28,14 @@ export default (state = INITIAL_STATE, action) => {
             return {...state, categoria: action.payload}
         case 'ENTREGA_EM_CASA_VALUE_CHANGE':
             return {...state, entregarEmCasa: action.payload}
-        case 'ENDERECO_VALUE_CHANGE':
-            return {...state, endereco: action.payload}
         case 'OPEN_STORAGE_SELECTION':
             return {...state, storage: action.payload}
+        case 'ADDRESS_SEARCHED':
+            return {...state, addressList: action.payload}
+        case 'CATEGORY_SEARCHED':
+            return {...state, categoryList: action.payload}
+        case 'ORDER_EXECUTED':
+            return state
         default:
             return state
     }

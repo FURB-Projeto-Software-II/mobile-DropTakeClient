@@ -23,7 +23,24 @@ import PaymentMethodsList from './pages/payment-methods-list/payment-methods-lis
 import reducers from './reducers'
 import orderInfo from './pages/order-info/order-info';
 
+
+import StorageMap from './pages/order-storage-map/order-storage-map'
+import StorageList from './pages/order-storage-list/order-storage-list'
+import { FontAwesome } from 'expo-vector-icons'
+
 const store = applyMiddleware(thunk, multi, promise)(createStore)(reducers)
+
+const MapIcon = ({selected, title}) => {
+  return (
+      <FontAwesome name="map-o" size="20" color={selected ? "red" : "black"}/>
+  )
+}
+
+const ListIcon = ({selected, title}) => {
+  return (
+      <FontAwesome name="list" size="20" color={selected ? "red" : "black"}/>
+  )
+}
 
 export default function App() {
 
@@ -61,11 +78,24 @@ export default function App() {
             />
 
             <Scene 
-              key="storageFind"
-              component={StorageFind}
-              title="Find Storage"
-              
-            />
+              key="storageFind" tabs tabBarStyle={{backgroundColor: '#FFF'}} hideNavBar="true"
+              title="Find Storage"  
+            >
+              <Scene key="map-tab" title="Map" icon={MapIcon}>
+                  <Scene 
+                      key="map"
+                      component={StorageMap}
+                      hideNavBar="true"
+                  />
+              </Scene>
+              <Scene key="list-tab" title="List" icon={ListIcon} >
+                  <Scene 
+                      key="list"
+                      component={StorageList}
+                      hideNavBar="true"
+                  />
+              </Scene>
+            </Scene>
 
             <Scene 
               key="addressCrud"

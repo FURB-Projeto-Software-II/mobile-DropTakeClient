@@ -8,7 +8,7 @@ import { Actions } from 'react-native-router-flux'
 import { FontAwesome } from 'expo-vector-icons'
 import { requestPermissionsAsync, getCurrentPositionAsync } from 'expo-location'
 
-import { getLoggedUserInfo } from './actions'
+import { getLoggedUserInfo, searchOrders } from './actions'
 
 class Home extends Component {
 
@@ -39,6 +39,34 @@ class Home extends Component {
                     </Layout>
                     <Divider style={styles.divider}/>
                     <Layout style={styles.orderList}>
+                        {
+                            () => {
+                                if (orders.len() >= 2) {
+                                    return (
+                                        <>
+                                        <Card style={styles.orderCard} onPress={() => Actions.orderInfo()}>
+                                            <Text category="label" style={styles.orderCardTitle}>TV Samgung</Text>
+                                            <Text>Entrega para José Affonso - Rua Arthur Schreiber, 71 - Velha, Blumenau - SC</Text>
+                                            <Text style={styles.orderCardStatus}>Pronto para retirada</Text>
+                                        </Card>
+                                        <Card style={styles.orderCard} onPress={() => Actions.orderInfo()}>
+                                            <Text category="label" style={styles.orderCardTitle}>TV Samgung</Text>
+                                            <Text>Entrega para José Affonso - Rua Arthur Schreiber, 71 - Velha, Blumenau - SC</Text>
+                                            <Text style={styles.orderCardStatus}>Pronto para retirada</Text>
+                                        </Card> 
+                                        </>
+                                    )
+                                } else if (orders.len == 1) {
+                                    return (
+                                        <Card style={styles.orderCard} onPress={() => Actions.orderInfo()}>
+                                            <Text category="label" style={styles.orderCardTitle}>TV Samgung</Text>
+                                            <Text>Entrega para José Affonso - Rua Arthur Schreiber, 71 - Velha, Blumenau - SC</Text>
+                                            <Text style={styles.orderCardStatus}>Pronto para retirada</Text>
+                                        </Card> 
+                                    )
+                                }
+                            }
+                        }
                         <Card style={styles.orderCard} onPress={() => Actions.orderInfo()}>
                             <Text category="label" style={styles.orderCardTitle}>TV Samgung</Text>
                             <Text>Entrega para José Affonso - Rua Arthur Schreiber, 71 - Velha, Blumenau - SC</Text>
@@ -62,10 +90,11 @@ class Home extends Component {
 }
 
 const mapStateToProps = state => ({
-    userName: state.home.userName
+    userName: state.home.userName,
+    orders: state.home.orders
 })
 
-const mapDispatchToProps = dispatch => bindActionCreators({ getLoggedUserInfo }, dispatch)
+const mapDispatchToProps = dispatch => bindActionCreators({ getLoggedUserInfo, searchOrders }, dispatch)
 
 export default connect(mapStateToProps, mapDispatchToProps)(Home)
 

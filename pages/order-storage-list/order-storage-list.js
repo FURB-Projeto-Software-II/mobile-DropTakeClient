@@ -1,11 +1,14 @@
 import React, { Component } from 'react'
 import { StyleSheet } from 'react-native';
-import { Layout, List, Divider, ListItem  } from '@ui-kitten/components';
+import { Layout, Divider, List, ListItem } from '@ui-kitten/components';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { Actions } from 'react-native-router-flux';
 
+import { View, FlatList, Text } from 'react-native';
+
 import { search, select } from './actions'
+import { TouchableWithoutFeedback } from 'react-native-gesture-handler';
 
 class StorageList extends Component {
 
@@ -16,13 +19,14 @@ class StorageList extends Component {
     renderItem = ({ item, index }) => {
 
         const { select } = this.props
-        
+
         return(
             <ListItem
-                onPress={() => Actions.storageProfile()}
-                title={`${item.name} ${index + 1}`}
-                description=''
-                onPress={select}
+            title={`${item.name}`}
+            onPress={() => {
+                select(item._id, item.name)
+            }}
+            description=''
             />
         )
     };

@@ -27,12 +27,14 @@ export const search = () => {
 
 }
 
-export  const select = () => {
-    Actions.orderInfo()
-    
-    return {
-        type: 'STORAGE_SELECTED',
-        paylaod: 12
+export  const select = (selected, name) => {
+   
+    return dispatch => {
+        Actions.orderCrud()
+
+        return dispatch({
+            type: 'STORAGE_SELECTED',
+            payload: {selected, name}
+        })
     }
-        
 }
