@@ -5,7 +5,15 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { Image } from 'react-native'
 
+import { getOrderInfo } from './actions'
+
 class OrderInfo extends Component {
+
+    componentDidMount() {
+
+        this.props.getOrderInfo(this.props.orderId)
+
+    }
 
     render() {
 
@@ -47,9 +55,10 @@ class OrderInfo extends Component {
 }
 
 const mapStateToProps = state => ({
+    order: state.orderInfo.order
 })
 
-const mapDispatchToProps = dispatch => bindActionCreators({  }, dispatch)
+const mapDispatchToProps = dispatch => bindActionCreators({ getOrderInfo }, dispatch)
 
 export default connect(mapStateToProps, mapDispatchToProps)(OrderInfo)
 

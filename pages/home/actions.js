@@ -30,7 +30,7 @@ export const getLoggedUserInfo = () => {
 
 export const searchOrders = () => {
 
-    return (dispatch, getState) = () => {
+    return (dispatch, getState) => {
 
         const config = {
             headers: {

@@ -5,13 +5,40 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { Actions } from 'react-native-router-flux'
 
-import { zipcodeChange, estadoChange,  cidadeChange, neighborhoodChange, streetChange, numberChange, complementChange, executeCadastrar } from './actions'
+import { 
+    zipcodeChange, 
+    estadoChange,  
+    cidadeChange, 
+    neighborhoodChange, 
+    streetChange, 
+    numberChange, 
+    complementChange, 
+    executeCadastrar, 
+    loadAddressToEdit 
+} from './actions'
 
 class AddressCrud extends Component {
 
+    componentDidMount() {
+
+        if (this.props.addressId) {
+            this.props.loadAddressToEdit(this.props.addressId)
+        }
+
+    }
+
     render() {
 
-        const { zipcodeChange, estadoChange, cidadeChange, neighborhoodChange, streetChange, numberChange, complementChange, executeCadastrar } = this.props
+        const { 
+            zipcodeChange, 
+            estadoChange, 
+            cidadeChange, 
+            neighborhoodChange, 
+            streetChange, 
+            numberChange, 
+            complementChange, 
+            executeCadastrar 
+        } = this.props
 
         return (
             <Layout>
@@ -118,10 +145,21 @@ const mapStateToProps = state => ({
     neighborhood: state.addressCrud.neighborhood,
     street: state.addressCrud.street,
     number: state.addressCrud.number,
-    complement: state.addressCrud.complement
+    complement: state.addressCrud.complement,
+    id: state.addressCrud.id
 })
 
-const mapDispatchToProps = dispatch => bindActionCreators({ zipcodeChange, estadoChange,  cidadeChange, neighborhoodChange, streetChange, numberChange, complementChange, executeCadastrar }, dispatch)
+const mapDispatchToProps = dispatch => bindActionCreators({ 
+    zipcodeChange, 
+    estadoChange, 
+    cidadeChange, 
+    neighborhoodChange, 
+    streetChange, 
+    numberChange, 
+    complementChange, 
+    executeCadastrar, 
+    loadAddressToEdit 
+}, dispatch)
 
 
 export default connect(mapStateToProps, mapDispatchToProps)(AddressCrud)

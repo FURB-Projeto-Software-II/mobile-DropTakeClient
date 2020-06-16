@@ -3,10 +3,35 @@ import { StyleSheet } from 'react-native';
 import { Layout, Input, Button } from '@ui-kitten/components';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import * as Location from 'expo-location';
 
-import { nomeChange, dataNascimentoChange, emailChange, confirmaEmailChange, senhaChange, confirmarSenhaChange, validateSignup } from './actions'
+import { 
+    nomeChange, 
+    dataNascimentoChange, 
+    emailChange, 
+    confirmaEmailChange, 
+    senhaChange, 
+    confirmarSenhaChange, 
+    validateSignup,
+    setLatitude,
+    setLongitude
+ } from './actions'
 
 class Signin extends Component {
+
+    componentDidMount() {
+        let statusI
+        Location.requestPermissionsAsync().then(status => {
+            statusI = status
+        })
+
+        if (statusI === 'granted') {
+            Location.getCurrentPositionAsync({}).then(location => {
+                this.props.setLongitude(location.coords.longitude)
+                this.props.setLatitude(location.coords.latitude)
+            })
+        }
+    }
 
     render() {
 
@@ -83,7 +108,17 @@ const mapStateToProps = state => ({
     confirmarSenha: state.signup.confirmarSenha
 })
 
-const mapDispatchToProps = dispatch => bindActionCreators({ nomeChange, dataNascimentoChange, emailChange, confirmaEmailChange, senhaChange, confirmarSenhaChange, validateSignup }, dispatch)
+const mapDispatchToProps = dispatch => bindActionCreators({ 
+    nomeChange, 
+    dataNascimentoChange, 
+    emailChange, 
+    confirmaEmailChange, 
+    senhaChange, 
+    confirmarSenhaChange, 
+    validateSignup,
+    setLatitude,
+    setLongitude
+}, dispatch)
 
 export default connect(mapStateToProps, mapDispatchToProps)(Signin)
 

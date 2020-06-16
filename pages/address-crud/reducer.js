@@ -5,7 +5,8 @@ const INITIAL_STATE = {
     neighborhood: '',
     street: '',
     number: '',
-    complement: ''
+    complement: '',
+    id: undefined
 }
 
 export default (state = INITIAL_STATE, action) => {
@@ -26,6 +27,17 @@ export default (state = INITIAL_STATE, action) => {
             return {...state, complement: action.payload}
         case 'EXECUTE_CADASTRAR':
             return state
+        case 'EDIT_ADDRESS_INFO':
+            return {
+                zipcode: action.payload.zipcode,
+                estado: action.payload.state,
+                cidade: action.payload.city,
+                neighborhood: action.payload.neighborhood,
+                street: action.payload.street,
+                number: action.payload.number,
+                complement: action.payload.complement,
+                id: action.payload._id
+            }
         default:
             return state
     }

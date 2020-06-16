@@ -14,8 +14,9 @@ class OrdersList extends Component {
 
     renderItem = ({ item, index }) => (
         <ListItem
-          title={`${item.description} ${index + 1}`}
+          title={`${item.description}`}
           description=''
+          onPress={item}
         />
     );
 

@@ -4,7 +4,9 @@ const INITIAL_STATE = {
     email: '',
     confirmaEmail: '',
     senha: '',
-    confirmarSenha: ''
+    confirmarSenha: '',
+    lat: undefined,
+    lng: undefined
 }
 
 export default (state = INITIAL_STATE, action) => {
@@ -23,6 +25,10 @@ export default (state = INITIAL_STATE, action) => {
             return {...state, confirmarSenha: action.payload}
         case 'SIGN_UP_EXECUTED':
             return state 
+        case 'SET_LATITUDE':
+            return {...state, lat: action.payload}
+        case 'SET_LONGITUDE':
+            return {...state, lng: action.payload}
         default:
             return state
     }

@@ -31,6 +31,16 @@ export const confirmarSenhaChange = event => ({
     payload: event.nativeEvent.text
 })
 
+export const setLatitude = latitude => ({
+    type: 'SET_LATITUDE',
+    paylaod: latitude
+})
+
+export const setLongitude = longitude => ({
+    type: 'SET_LONGITUDE',
+    payload: longitude
+})
+
 export const validateSignup = () => {
 
     var valid = true;
@@ -66,7 +76,9 @@ export const executeSignup = () => {
         api.post('/auth/client/register', {
             nome: getState().signup.nome,
             email: getState().signup.email,
-            password: getState().signup.senha
+            password: getState().signup.senha,
+            lng: getState().signup.lng, 
+            lat: getState().signup.lat
         })
         .then(result => {
             if (result.data.auth === true) {

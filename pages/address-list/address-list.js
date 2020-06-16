@@ -5,7 +5,7 @@ import { StyleSheet } from 'react-native'
 import { Layout, Button,ListItem, List, Divider } from '@ui-kitten/components'
 import { Actions } from 'react-native-router-flux'
 
-import { search } from './actions'
+import { search, edit } from './actions'
 
 
 class AddressList extends Component {
@@ -18,12 +18,18 @@ class AddressList extends Component {
         super(props)
     }
 
-    renderItem = ({ item, index }) => (
-        <ListItem
-          title={`${item.street}, ${item.number}`}
-          description={`CEP: ${item.zipcode} - Bairro: ${item.neighborhood}`}
-        />
-    );
+    renderItem = ({ item, index }) => {
+
+        const { edit } = this.props
+
+        return (
+            <ListItem
+            title={`${item.street}, ${item.number}`}
+            description={`CEP: ${item.zipcode} - Bairro: ${item.neighborhood}`}
+            onPress={() => edit(item._id)}
+            />
+        )
+    };
 
     render() {
 
@@ -54,7 +60,7 @@ const mapStateToProps = state => ({
     list: state.addressList.list
 })
 
-const mapDispatchToProps = dispatch => bindActionCreators({ search }, dispatch)
+const mapDispatchToProps = dispatch => bindActionCreators({ search, edit }, dispatch)
 
 export default connect(mapStateToProps, mapDispatchToProps)(AddressList)
 

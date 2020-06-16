@@ -55,26 +55,79 @@ export const executeCadastrar = () => {
         const number = getState().addressCrud.number
         const complement = getState().addressCrud.complement
 
-        api.post(`/user/adress`, { 
-            zipcode,
-            state,
-            city,
-            neighborhood,
-            street,
-            number,
-            complement
-        }, config)
+        const id = getState().addressCrud.id
+        
+        if (!id){
+
+            api.post(`/user/adress`, { 
+                zipcode,
+                state,
+                city,
+                neighborhood,
+                street,
+                number,
+                complement
+            }, config)
+            .then(result => {
+                Actions.addressList()
+
+                return dispatch({
+                    type: 'EXECUTE_CADASTRAR',
+                    payload: result.data
+                })
+                
+            }).catch(error => {
+                Alert.alert(error.response.data)
+            })
+
+        } else {
+
+            api.put(`/user/adress/${id}`, { 
+                zipcode,
+                state,
+                city,
+                neighborhood,
+                street,
+                number,
+                complement
+            }, config)
+            .then(result => {
+                Actions.addressList()
+
+                return dispatch({
+                    type: 'EXECUTE_CADASTRAR',
+                    payload: result.data
+                })
+                
+            }).catch(error => {
+                Alert.alert(error.response.data)
+            })
+
+        }
+
+    }
+}
+
+export const loadAddressToEdit = id => {
+
+    return (dispatch, getState) => {
+
+        const config = {
+            headers: {
+                authorization: getState().login.token
+            }
+        }
+
+        api.get(`/user/adress/${id}`, config)
         .then(result => {
-            Actions.addressList()
 
             return dispatch({
-                type: 'EXECUTE_CADASTRAR',
+                type: 'EDIT_ADDRESS_INFO',
                 payload: result.data
             })
-            
-        }).catch(error => {
-            Alert.alert(error.response.data)
+
         })
 
     }
+
 }
