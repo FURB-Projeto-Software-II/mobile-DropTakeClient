@@ -4,7 +4,7 @@ import { Layout, List, Divider, ListItem  } from '@ui-kitten/components';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
-import { search } from './actions'
+import { search, openOrderInfo } from './actions'
 
 class OrdersList extends Component {
 
@@ -12,13 +12,18 @@ class OrdersList extends Component {
         this.props.search()
     }
 
-    renderItem = ({ item, index }) => (
-        <ListItem
-          title={`${item.description}`}
-          description=''
-          onPress={item}
-        />
-    );
+    renderItem = ({ item, index }) => {
+
+        const { openOrderInfo } = this.props
+
+        return(
+            <ListItem
+            title={`${item.description}`}
+            description=''
+            onPress={() => openOrderInfo(item._id)}
+            />
+        )
+    };
 
     render() {
 
@@ -41,7 +46,7 @@ const mapStateToProps = state => ({
     list: state.ordersList.list
 })
 
-const mapDispatchToProps = dispatch => bindActionCreators({ search }, dispatch)
+const mapDispatchToProps = dispatch => bindActionCreators({ search, openOrderInfo }, dispatch)
 
 export default connect(mapStateToProps, mapDispatchToProps)(OrdersList)
 

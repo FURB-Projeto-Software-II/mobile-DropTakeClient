@@ -30,13 +30,11 @@ export const search = () => {
 export const openOrderInfo = (order_id) => {
 
     return dispatch => {
-        
-        Actions.orderInfo({orderId: order_id })
 
-        return dispatch({
+        return [dispatch({
             type: 'ORDER_INFO_ENTERED',
             payload: order_id
-        })
+        }), Actions.orderInfo({orderId: order_id })]
 
     }
 

@@ -1,6 +1,10 @@
 import api from '../../server/api'
 import { Alert } from 'react-native'
 
+export const pageInit = () => ({
+    type: 'PAGE_INIT'
+})
+
 export const getLoggedUserInfo = () => {
 
     return (dispatch, getState) => {
@@ -40,17 +44,53 @@ export const searchOrders = () => {
 
         api.get('/order', config)
         .then(result => {
-
-            return dispatch({
-                type: 'ORDERS_SEARCHED',
-                payload: result.data
-            })
-
+            dispatch(retrieveDataLastOrders(result.data))
         })
         .catch(error => {
             Alert.alert(error.response.data)
         })
 
+    }
+
+}
+
+export const retrieveDataLastOrders = orders => {
+
+    return (dispatch, getState) => {
+
+        let ordersInfo = []
+
+        const config = {
+            headers: {
+                authorization: getState().login.token
+            }
+        }
+
+        api.get(`/order/${orders[orders.length-1]._id}`, config)
+        .then(result => {
+            ordersInfo.push(result.data)
+
+            if (orders.length > 1) {
+
+                api.get(`/order/${orders[orders.length-2]._id}`, config)
+                .then(result => {
+                    ordersInfo.push(result.data)
+
+                    return dispatch({
+                        type: 'ORDERS_INFO_RETRIEVED',
+                        payload: ordersInfo
+                    })
+                })
+
+            }
+
+            return dispatch({
+                type: 'ORDERS_INFO_RETRIEVED',
+                payload: ordersInfo
+            })
+        })
+
+        
     }
 
 }

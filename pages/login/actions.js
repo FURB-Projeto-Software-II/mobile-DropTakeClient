@@ -22,12 +22,12 @@ export const  executeLogin = () => {
         api.post(`/auth/login`, { email, password })
         .then(result => {
             if (result.data.auth === true) {
-                Actions.home()
+                
 
-                return dispatch({
+                return [dispatch({
                     type: 'EXECUTE_LOGIN',
                     payload: result.data.token
-                })
+                }), Actions.home()]
             }
             
         }).catch(error => {
