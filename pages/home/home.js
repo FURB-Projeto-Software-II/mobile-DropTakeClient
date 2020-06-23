@@ -1,8 +1,8 @@
 import React, { Component, useState, useEffect } from 'react'
-import { StyleSheet } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import { connect } from 'react-redux';
 import MapView from 'react-native-maps';
-import { Layout, Text, Divider, Button, Card, View } from '@ui-kitten/components';
+import { Layout, Text, Divider, Button, Card,  } from '@ui-kitten/components';
 import { bindActionCreators } from 'redux';
 import { Actions } from 'react-native-router-flux'
 import { FontAwesome } from 'expo-vector-icons'
@@ -25,15 +25,16 @@ class Home extends Component {
         return (
             <>
                 <Layout style={styles.containerUp}>
-                    <MapView style={styles.mapStyle} >
+                    <MapView style={styles.mapStyle} />
+                    <View style={styles.viewStyle}>
                         <Button style={styles.button} onPress={() => Actions.orderCrud()}>
                             <Text style={styles.buttonText}>NOVO PEDIDO</Text>
                         </Button>
 
-                        <Button style={styles.configButton} onPress={() => Actions.configs()}>
+                        <Button style={styles.buttonCfg} onPress={() => Actions.configs()}>
                             <FontAwesome name="gear" size={21} color="black" />
                         </Button>
-                    </MapView>
+                    </View>
                 </Layout>
                 <Layout style={styles.containerDown}>
                     <Layout style={styles.welcomebox}>
@@ -100,7 +101,19 @@ const styles = StyleSheet.create({
         marginRight: 15,
         marginBottom: 15,
         backgroundColor: '#501380',
-        borderColor: 'transparent'
+        borderColor: 'transparent',
+    },
+    buttonCfg: {
+        backgroundColor: 'white',
+        width: '20%',
+        marginTop: 50,
+        marginLeft: 15,
+        marginRight: 15,
+        marginBottom: 15,
+        width: 60,
+        borderColor: 'transparent',
+        borderRadius: 50,
+        marginTop: 'auto'
     },
     buttonText: {
         color: 'white',
@@ -141,15 +154,22 @@ const styles = StyleSheet.create({
     mapStyle: {
         width: '100%',
         height: '100%',
+        position: 'absolute',
+    },
+    viewStyle: {
+        width: '100%',
+        height: '100%',
+        position: 'absolute',
+        backgroundColor: 'transparent'
     },
     configButton: {
-        flexDirection: 'row-reverse',
+        
         backgroundColor: 'white',
         borderColor: 'transparent',
         height: 60,
         width: 60,
         top: '45%',
         left: '90%',
-        borderRadius: 50
+        
     }
 })
