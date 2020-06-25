@@ -6,35 +6,41 @@ import { bindActionCreators } from 'redux';
 import { requestPermissionsAsync, getCurrentPositionAsync } from 'expo-location'
 
 import { search, select, setCurrentRegion } from './actions'
+import { Button } from '@ui-kitten/components';
 
 class StorageMap extends Component {
-    
+  
   async componentDidMount() {
 
-    const { granted } = await requestPermissionsAsync();
-
-        if (granted) {
-            
-            const { coords } = await getCurrentPositionAsync({
-                enableHighAccuracy: true,
-            });
-
-            const { latitude, longitude } = coords;
-
-            this.props.setCurrentRegion({
-              latitude,
-              longitude,
-              latitudeDelta: 0.04,
-              longitudeDelta: 0.04,
-            })
-
-        }
+    this.loadCurrentLocation()
 
     this.props.search()
   }
 
   handleRegionChanged = region => {
     this.props.setCurrentRegion(region)
+  }
+
+  async loadCurrentLocation() {
+    const { granted } = await requestPermissionsAsync();
+
+    if (granted) {
+        
+        const { coords } = await getCurrentPositionAsync({
+            enableHighAccuracy: true,
+        });
+
+        const { latitude, longitude } = coords;
+
+        this.props.setCurrentRegion({
+          latitude,
+          longitude,
+          latitudeDelta: 1,
+          longitudeDelta: 1,
+        })
+
+    }
+
   }
 
   render() {
