@@ -3,7 +3,7 @@ import { StyleSheet } from 'react-native';
 import { Layout, Input, Button } from '@ui-kitten/components';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import * as Location from 'expo-location';
+import { requestPermissionsAsync, getCurrentPositionAsync } from 'expo-location'
 
 import { 
     nomeChange, 
@@ -19,17 +19,21 @@ import {
 
 class Signin extends Component {
 
-    componentDidMount() {
-        let statusI
-        Location.requestPermissionsAsync().then(status => {
-            statusI = status
-        })
+    async componentDidMount() {
 
-        if (statusI === 'granted') {
-            Location.getCurrentPositionAsync({}).then(location => {
-                this.props.setLongitude(location.coords.longitude)
-                this.props.setLatitude(location.coords.latitude)
-            })
+        const { granted } = await requestPermissionsAsync();
+
+        if (granted) {
+            
+            const { coords } = await getCurrentPositionAsync({
+                enableHighAccuracy: true,
+            });
+
+            const { latitude, longitude } = coords;
+
+            this.props.setLongitude(latitude)
+            this.props.setLatitude(longitude)
+
         }
     }
 

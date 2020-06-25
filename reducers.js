@@ -8,6 +8,7 @@ import homeReducer from './pages/home/reducer'
 import addressListReducer from './pages/address-list/reducer'
 import orderStoreListReducer from './pages/order-storage-list/reducer'
 import orderInfoReducer from './pages/order-info/reducer'
+import orderStoreMapReducer from './pages/order-storage-map/reducer'
 
 const rootReducer = combineReducers({
     login: loginReducer,
@@ -18,7 +19,8 @@ const rootReducer = combineReducers({
     addressList: addressListReducer,
     home: homeReducer,
     orderStoreList: orderStoreListReducer,
-    orderInfo: orderInfoReducer
+    orderInfo: orderInfoReducer,
+    orderStoreMap: orderStoreMapReducer
 })
 
 export default rootReducer

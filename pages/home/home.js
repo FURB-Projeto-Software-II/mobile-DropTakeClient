@@ -45,7 +45,7 @@ class Home extends Component {
                         {
                             loaded ? (orders.map(order => {
                                 return (
-                                    <Card style={styles.orderCard} onPress={() => Actions.orderInfo()}>
+                                    <Card key={order._id} style={styles.orderCard} onPress={() => Actions.orderInfo()}>
                                         <Text category="label" style={styles.orderCardTitle}>TV Samgung</Text>
                                         <Text>{`Entrega para ${order.storage.name} - ${order.storage.adresses[0] ? order.storage.adresses[0].street : ''}, ${order.storage.adresses[0] ? order.storage.adresses[0].number : ''} - ${order.storage.adresses[0] ? order.storage.adresses[0].neighborhood : ''}, ${order.storage.adresses[0] ? order.storage.adresses[0].city : ''} - ${order.storage.adresses[0] ? order.storage.adresses[0].state : ''}`}</Text>
                                         <Text style={[styles.orderCardStatus, order.order.status == 0 ? styles.status0 : order.order.status == 1 ? styles.status1 : styles.status3]}>
