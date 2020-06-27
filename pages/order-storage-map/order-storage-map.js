@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import MapView, { Marker } from 'react-native-maps';
-import { StyleSheet, Text, View, Dimensions } from 'react-native';
+import MapView, { Marker, Callout } from 'react-native-maps';
+import { StyleSheet, View, Dimensions, Image, Text } from 'react-native';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { requestPermissionsAsync, getCurrentPositionAsync } from 'expo-location'
@@ -9,10 +9,10 @@ import { search, select, setCurrentRegion } from './actions'
 import { Button } from '@ui-kitten/components';
 
 class StorageMap extends Component {
-  
+
   async componentDidMount() {
 
-    this.loadCurrentLocation()
+    await this.loadCurrentLocation()
 
     this.props.search()
   }
@@ -35,8 +35,8 @@ class StorageMap extends Component {
         this.props.setCurrentRegion({
           latitude,
           longitude,
-          latitudeDelta: 1,
-          longitudeDelta: 1,
+          latitudeDelta: 0.5,
+          longitudeDelta: 0.5,
         })
 
     }
@@ -45,28 +45,35 @@ class StorageMap extends Component {
 
   render() {
 
-    const { list, currentRegion } = this.props
+    const { list, currentRegion, select } = this.props
+
+    if (!currentRegion) {
+      return null;
+    }
 
     return (
       <View style={styles.container}>
         <MapView style={styles.mapStyle}
           onRegionChangeComplete={region => this.handleRegionChanged(region)}
           initialRegion={currentRegion}
-        />
+        >
         {
           list.map(storage => 
-            storage.adresses[0] ? (<Marker
-              key={storage._id}
-              coordinate={{
-                latitude: parseInt(storage.adresses[0].lat),
-                longitude: parseInt(storage.adresses[0].lng)
-              }}
-              title={storage.name}
-            >
-
-            </Marker>) : <></>
+            storage.adresses[0] ? (
+              <Marker coordinate={{latitude: parseInt(storage.adresses[0].lat), longitude: parseInt(storage.adresses[0].lng)}}>
+                <Image source={{ uri: 'https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcSF3Cj0ceIsl8A9Mh7jZjs2qKBXdQat-0ohZA&usqp=CAU' }} style={styles.marker}/>
+    
+                <Callout onPress={() => {select(storage._id, storage.name)}}>
+                  <View style={styles.callout}>
+                    <Text style={styles.storageName}>{storage.name}</Text>
+                    <Text>Clique para selecionar</Text>
+                  </View>
+                </Callout>
+              </Marker>
+            ) : <></>
           )
         }
+        </MapView>
       </View>
       
     );
@@ -94,4 +101,18 @@ const styles = StyleSheet.create({
     width: Dimensions.get('window').width,
     height: Dimensions.get('window').height,
   },
+  marker: {
+    width: 40,
+    height: 40,
+    borderRadius: 4,
+    borderWidth: 4,
+    borderColor: '#FFF'
+  },
+  callout: {
+    width: 260,
+  },
+  storageName: {
+    fontWeight: 'bold',
+    fontSize: 16
+  }
 });
