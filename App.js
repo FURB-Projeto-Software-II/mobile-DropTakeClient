@@ -6,7 +6,7 @@ import { createStore, applyMiddleware } from 'redux'
 import promise from 'redux-promise'
 import multi from 'redux-multi'
 import thunk from 'redux-thunk'
-import { Router, Scene } from 'react-native-router-flux';
+import { Router, Scene, Actions } from 'react-native-router-flux';
 
 import Login from './pages/login/login'
 import Signin from './pages/signin/signin'
@@ -74,7 +74,7 @@ export default function App() {
               key="orderCrud"
               component={OrderCrud}
               title="Order"
-              
+              onBack={()=>{Actions.home()}} back={true}
             />
 
             <Scene 
@@ -85,14 +85,14 @@ export default function App() {
                   <Scene 
                       key="map"
                       component={StorageMap}
-                      
+                      onBack={()=>{Actions.orderCrud()}} back={true}
                   />
               </Scene>
               <Scene key="list-tab" title="List" icon={ListIcon} >
                   <Scene 
                       key="list"
                       component={StorageList}
-                      
+                      onBack={()=>{Actions.orderCrud()}} back={true}
                   />
               </Scene>
             </Scene>
@@ -101,7 +101,7 @@ export default function App() {
               key="addressCrud"
               component={AddressCrud}
               title="Address"
-              
+              onBack={()=>{Actions.addressList()}} back={true}
             />
 
             <Scene 
@@ -123,25 +123,28 @@ export default function App() {
               key="configs"
               component={Configs}
               title="Configurations"
+              onBack={()=>{Actions.home()}} back={true}
             />
 
             <Scene
               key="storageProfile"
               component={StorageProfile}
               title="Storage Profile"
+
             />
 
             <Scene
               key="addressList"
               component={AddressList}
               title="Address List"
-              
+              onBack={()=>{Actions.configs()}} back={true}
             />
 
             <Scene
               key="paymentMethodsList"
               component={PaymentMethodsList}
               title="Payment Methods List"
+              onBack={()=>{Actions.configs()}} back={true}
             />
           </Scene>
         </Router>
