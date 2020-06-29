@@ -1,5 +1,5 @@
 import React, { Component } from "react"
-import { StyleSheet } from 'react-native';
+import { StyleSheet, Dimensions } from 'react-native';
 import { Layout, Text, Divider } from '@ui-kitten/components';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
@@ -7,6 +7,7 @@ import { Image } from 'react-native'
 import QRCode from 'react-native-qrcode-svg'
 
 import { getOrderInfo, pageInit } from './actions'
+import { ScrollView } from "react-native-gesture-handler";
 
 class OrderInfo extends Component {
 
@@ -22,6 +23,7 @@ class OrderInfo extends Component {
         const { order, storage, adress, category, loaded } = this.props
 
         return (
+            <ScrollView>
             <Layout style={styles.container}>
                 <Text category="label" style={styles.title}>Informações do Produto</Text>
                 <Text>{`Descrição: ${order.description}`}</Text>
@@ -42,6 +44,12 @@ class OrderInfo extends Component {
                 
                 <Divider style={styles.divider}/>
 
+                <Text style={[styles.orderCardStatus, order.status == 0 ? styles.status0 : order.status == 1 ? styles.status1 : styles.status3]}>
+                    Status: {`${order.status == 0 ? `Pedido em entrega` : order.status == 1 ? `edido pronto para retirada` : `Pedido retirado` }`}
+                </Text>
+
+                <Divider style={styles.divider}/>
+
                 <Layout style={styles.qrcodebox}>
                     <Text category="label" style={styles.title}>QRCODE para retirada do produto</Text>
                     {/* <Image  source={{
@@ -55,6 +63,7 @@ class OrderInfo extends Component {
                 
 
             </Layout>
+            </ScrollView>
         )
 
     }
@@ -77,7 +86,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(OrderInfo)
 const styles = StyleSheet.create({
     container: {
         padding: 15,
-        maxHeight: '100%',
+        maxHeight: Math.round(Dimensions.get('window').height) + 70,
     },
     divider: {
         margin: 15
@@ -92,5 +101,18 @@ const styles = StyleSheet.create({
     },
     qrcodebox: {
         alignItems: 'center',
-    }
+    },
+    orderCardStatus: {
+        marginTop: 3,
+        fontWeight: 'bold',
+    },
+    status0: {
+        color: '#d6b41c'
+    },
+    status1: {
+        color: '#0091bd',
+    },
+    status2: {
+        color: 'green'
+    },
 });

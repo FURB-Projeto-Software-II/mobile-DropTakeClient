@@ -27,7 +27,7 @@ export default (state = INITIAL_STATE, action) => {
         case 'CATEGORIA_VALUE_CHANGE':
             return {...state, categoria: action.payload}
         case 'ENTREGA_EM_CASA_VALUE_CHANGE':
-            return {...state, entregarEmCasa: action.payload}
+            return {...state, entregarEmCasa: action.payload, endereco: action.payload == true ? state.endereco : undefined }
         case 'OPEN_STORAGE_SELECTION':
             return {...state, storage: action.payload}
         case 'ADDRESS_SEARCHED':

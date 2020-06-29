@@ -19,7 +19,7 @@ class OrdersList extends Component {
         return(
             <ListItem
             title={`${item.description}`}
-            description=''
+            description={`${item.status == 0 ? `Pedido em entrega` : item.status == 1 ? `edido pronto para retirada` : `Pedido retirado` }`}
             onPress={() => openOrderInfo(item._id)}
             />
         )

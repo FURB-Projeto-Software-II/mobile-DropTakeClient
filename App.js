@@ -85,14 +85,14 @@ export default function App() {
                   <Scene 
                       key="map"
                       component={StorageMap}
-                      hideNavBar="true"
+                      
                   />
               </Scene>
               <Scene key="list-tab" title="List" icon={ListIcon} >
                   <Scene 
                       key="list"
                       component={StorageList}
-                      hideNavBar="true"
+                      
                   />
               </Scene>
             </Scene>

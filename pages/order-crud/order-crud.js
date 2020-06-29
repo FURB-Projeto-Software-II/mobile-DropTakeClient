@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { StyleSheet } from 'react-native';
+import { StyleSheet, Dimensions } from 'react-native';
 import { Layout, Input, Divider, Select, Button, SelectItem, Text, CheckBox } from '@ui-kitten/components';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
@@ -19,6 +19,7 @@ import { descricaoChange,
 } from './actions'
 
 import { Item, Picker, Icon } from 'native-base';
+import { ScrollView } from 'react-native-gesture-handler';
 
 class OrderCrud extends Component {
 
@@ -45,7 +46,7 @@ class OrderCrud extends Component {
         } = this.props
         
         return(
-            <>
+            <ScrollView style={styles.containerMaster}>
             <Layout>
                 <Layout style={[styles.layout, styles.marginTop]}>
                     <Input
@@ -165,7 +166,7 @@ class OrderCrud extends Component {
                     CONFIRMAR
                 </Button>
             </Layout>
-            </>
+            </ScrollView>
         )
     }
 
@@ -203,6 +204,9 @@ const mapDispatchToProps = dispatch => bindActionCreators({ descricaoChange,
 export default connect(mapStateToProps, mapDispatchToProps)(OrderCrud)
 
 const styles = StyleSheet.create({
+    containerMaster: {
+        maxHeight: Math.round(Dimensions.get('window').height) + 15
+    },
     container: {
         maxHeight: '90%',
     },
