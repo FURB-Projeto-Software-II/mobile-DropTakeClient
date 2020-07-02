@@ -1,5 +1,5 @@
 const INITIAL_STATE = {
-    lsit: []
+    list: []
 }
 
 export default (state = INITIAL_STATE, action) => {

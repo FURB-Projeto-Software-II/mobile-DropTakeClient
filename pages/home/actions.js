@@ -1,5 +1,6 @@
 import api from '../../server/api'
 import { Alert } from 'react-native'
+import { Actions } from 'react-native-router-flux'
 
 export const pageInit = () => ({
     type: 'PAGE_INIT'
@@ -82,15 +83,28 @@ export const retrieveDataLastOrders = orders => {
                     })
                 })
 
+            } else {
+                return dispatch({
+                    type: 'ORDERS_INFO_RETRIEVED',
+                    payload: ordersInfo
+                })
             }
-
-            return dispatch({
-                type: 'ORDERS_INFO_RETRIEVED',
-                payload: ordersInfo
-            })
         })
 
         
+    }
+
+}
+
+export const openOrderInfo = (order_id) => {
+
+    return dispatch => {
+
+        return [dispatch({
+            type: 'ORDER_INFO_ENTERED',
+            payload: order_id
+        }), Actions.orderInfo({orderId: order_id })]
+
     }
 
 }

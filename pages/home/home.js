@@ -8,7 +8,7 @@ import { Actions } from 'react-native-router-flux'
 import { FontAwesome } from 'expo-vector-icons'
 import { requestPermissionsAsync, getCurrentPositionAsync } from 'expo-location'
 
-import { getLoggedUserInfo, searchOrders, pageInit } from './actions'
+import { getLoggedUserInfo, searchOrders, pageInit, openOrderInfo } from './actions'
 
 class Home extends Component {
 
@@ -20,7 +20,7 @@ class Home extends Component {
 
     render() {
 
-        const { userName, orders, loaded } = this.props
+        const { userName, orders, loaded, openOrderInfo } = this.props
 
         return (
             <>
@@ -45,8 +45,9 @@ class Home extends Component {
                         {
                             loaded ? (orders.map(order => {
                                 return (
-                                    <Card key={order._id} style={styles.orderCard} onPress={() => Actions.orderInfo()}>
-                                        <Text category="label" style={styles.orderCardTitle}>TV Samgung</Text>
+                                    
+                                    <Card key={order.order._id} style={styles.orderCard} onPress={() => openOrderInfo(order.order._id)}>
+                                        <Text category="label" style={styles.orderCardTitle}>{order.order.description}</Text>
                                         <Text>{`Entrega para ${order.storage.name} - ${order.storage.adresses[0] ? order.storage.adresses[0].street : ''}, ${order.storage.adresses[0] ? order.storage.adresses[0].number : ''} - ${order.storage.adresses[0] ? order.storage.adresses[0].neighborhood : ''}, ${order.storage.adresses[0] ? order.storage.adresses[0].city : ''} - ${order.storage.adresses[0] ? order.storage.adresses[0].state : ''}`}</Text>
                                         <Text style={[styles.orderCardStatus, order.order.status == 0 ? styles.status0 : order.order.status == 1 ? styles.status1 : styles.status3]}>
                                             {`${order.order.status == 0 ? `Pedido em entrega` : order.order.status == 1 ? `edido pronto para retirada` : `Pedido retirado` }`}
@@ -73,7 +74,7 @@ const mapStateToProps = state => ({
     loaded: state.home.loaded
 })
 
-const mapDispatchToProps = dispatch => bindActionCreators({ getLoggedUserInfo, searchOrders, pageInit }, dispatch)
+const mapDispatchToProps = dispatch => bindActionCreators({ getLoggedUserInfo, searchOrders, pageInit, openOrderInfo }, dispatch)
 
 export default connect(mapStateToProps, mapDispatchToProps)(Home)
 

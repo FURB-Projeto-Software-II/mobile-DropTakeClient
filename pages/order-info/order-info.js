@@ -39,8 +39,8 @@ class OrderInfo extends Component {
                 <Text category="label" style={styles.title}>Informações da Entrega</Text>
                 <Text>{`Responsável Storage: ${storage.name}`}</Text>
                 <Text>{storage.adresses.length > 0 ? `${`Endereço Storage: ${storage.adresses[0].street}, ${storage.adresses[0].number} - ${storage.adresses[0].neighborhood}, ${storage.adresses[0].city} - ${storage.adresses[0].state}`}` : ''}</Text>
-                <Text>{`Entrega em sua casa: ${adress._id == "" ? 'NÃO' : 'SIM'}`}</Text>
-                <Text>{adress._id == "" ? `${`Endereço de Entrega: ${adress.street}, ${adress.number} - ${adress.neighborhood}, ${adress.city} - ${adress.state}`}` : ''}</Text>
+                <Text>{`Entrega em sua casa: ${adress != undefined ? 'NÃO' : 'SIM'}`}</Text>
+                <Text>{adress != undefined ? `${`Endereço de Entrega: ${adress.street}, ${adress.number} - ${adress.neighborhood}, ${adress.city} - ${adress.state}`}` : ''}</Text>
                 
                 <Divider style={styles.divider}/>
 
