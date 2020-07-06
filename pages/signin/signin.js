@@ -81,6 +81,7 @@ class Signin extends Component {
                         placeholder='Senha'
                         value={this.props.senha}
                         type="password"
+                        secureTextEntry={true}
                         onChange={e =>senhaChange(e)}
                     />
                 </Layout>
@@ -90,6 +91,7 @@ class Signin extends Component {
                         placeholder='Confirmar a Senha'
                         value={this.props.confirmarSenha}
                         type="password"
+                        secureTextEntry={true}
                         onChange={e => confirmarSenhaChange(e)}
                     />
                 </Layout>

@@ -35,7 +35,17 @@ export default (state = INITIAL_STATE, action) => {
         case 'CATEGORY_SEARCHED':
             return {...state, categoryList: action.payload}
         case 'ORDER_EXECUTED':
-            return state
+            return {
+                ...state,
+                descricao: '',
+                largura: '',
+                altura: '',
+                peso: '',
+                categoria: undefined,
+                entregarEmCasa: false,
+                endereco: undefined,storage: -1,
+                storageDescricao: '',
+            }
         default:
             return state
     }
