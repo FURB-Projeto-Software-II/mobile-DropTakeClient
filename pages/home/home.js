@@ -23,7 +23,7 @@ class Home extends Component {
         const { userName, orders, loaded, openOrderInfo } = this.props
 
         return (
-            <>
+            <View >
                 <Layout style={styles.containerUp}>
                     <MapView style={styles.mapStyle} />
                     <View style={styles.viewStyle}>
@@ -49,8 +49,8 @@ class Home extends Component {
                                     <Card key={order.order._id} style={styles.orderCard} onPress={() => openOrderInfo(order.order._id)}>
                                         <Text category="label" style={styles.orderCardTitle}>{order.order.description}</Text>
                                         <Text>{`Entrega para ${order.storage.name} - ${order.storage.adresses[0] ? order.storage.adresses[0].street : ''}, ${order.storage.adresses[0] ? order.storage.adresses[0].number : ''} - ${order.storage.adresses[0] ? order.storage.adresses[0].neighborhood : ''}, ${order.storage.adresses[0] ? order.storage.adresses[0].city : ''} - ${order.storage.adresses[0] ? order.storage.adresses[0].state : ''}`}</Text>
-                                        <Text style={[styles.orderCardStatus, order.order.status == 0 ? styles.status0 : order.order.status == 1 ? styles.status1 : styles.status3]}>
-                                            {`${order.order.status == 0 ? `Pedido em entrega` : order.order.status == 1 ? `edido pronto para retirada` : `Pedido retirado` }`}
+                                        <Text style={[styles.orderCardStatus, order.order.status == 0 ? styles.status0 : order.order.status == 1 ? styles.status1 : styles.status2]}>
+                                            {`${order.order.status == 0 ? `Pedido em entrega` : order.order.status == 1 ? `Pedido pronto para retirada` : `Pedido retirado` }`}
                                         </Text>
                                     </Card>
                                 )
@@ -63,7 +63,7 @@ class Home extends Component {
                         </Button>
                     </Layout>
                 </Layout>
-            </>
+            </View>
         )
     }
 }

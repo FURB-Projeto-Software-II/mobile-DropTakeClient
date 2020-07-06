@@ -39,13 +39,13 @@ class OrderInfo extends Component {
                 <Text category="label" style={styles.title}>Informações da Entrega</Text>
                 <Text>{`Responsável Storage: ${storage.name}`}</Text>
                 <Text>{storage.adresses.length > 0 ? `${`Endereço Storage: ${storage.adresses[0].street}, ${storage.adresses[0].number} - ${storage.adresses[0].neighborhood}, ${storage.adresses[0].city} - ${storage.adresses[0].state}`}` : ''}</Text>
-                <Text>{`Entrega em sua casa: ${adress != undefined ? 'NÃO' : 'SIM'}`}</Text>
+                <Text>{`Entrega em sua casa: ${adress != undefined ? 'SIM' : 'NÃO'}`}</Text>
                 <Text>{adress != undefined ? `${`Endereço de Entrega: ${adress.street}, ${adress.number} - ${adress.neighborhood}, ${adress.city} - ${adress.state}`}` : ''}</Text>
                 
                 <Divider style={styles.divider}/>
 
-                <Text style={[styles.orderCardStatus, order.status == 0 ? styles.status0 : order.status == 1 ? styles.status1 : styles.status3]}>
-                    Status: {`${order.status == 0 ? `Pedido em entrega` : order.status == 1 ? `edido pronto para retirada` : `Pedido retirado` }`}
+                <Text style={[styles.orderCardStatus, order.status == 0 ? styles.status0 : order.status == 1 ? styles.status1 : styles.status2]}>
+                    Status: {`${order.status == 0 ? `Pedido em entrega` : order.status == 1 ? `Pedido pronto para retirada` : `Pedido retirado` }`}
                 </Text>
 
                 <Divider style={styles.divider}/>
