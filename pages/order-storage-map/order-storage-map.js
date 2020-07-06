@@ -60,7 +60,7 @@ class StorageMap extends Component {
         {
           list.map(storage => 
             storage.adresses[0] ? (
-              <Marker key={storage._id} coordinate={{latitude: parseInt(storage.adresses[0].lat), longitude: parseInt(storage.adresses[0].lng)}}>
+              <Marker key={storage._id} coordinate={{latitude: parseFloat(storage.adresses[0].lat), longitude: parseFloat(storage.adresses[0].lng)}}>
                 <Image source={{ uri: 'https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcSF3Cj0ceIsl8A9Mh7jZjs2qKBXdQat-0ohZA&usqp=CAU' }} style={styles.marker}/>
     
                 <Callout onPress={() => {select(storage._id, storage.name)}}>
