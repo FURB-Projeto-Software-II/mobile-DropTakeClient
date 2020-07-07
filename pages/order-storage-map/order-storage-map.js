@@ -8,6 +8,8 @@ import { requestPermissionsAsync, getCurrentPositionAsync } from 'expo-location'
 import { search, select, setCurrentRegion } from './actions'
 import { Button } from '@ui-kitten/components';
 
+import { FontAwesome5 } from 'expo-vector-icons'
+
 class StorageMap extends Component {
 
   async componentDidMount() {
@@ -61,7 +63,7 @@ class StorageMap extends Component {
           list.map(storage => 
             storage.adresses[0] ? (
               <Marker key={storage._id} coordinate={{latitude: parseFloat(storage.adresses[0].lat), longitude: parseFloat(storage.adresses[0].lng)}}>
-                <Image source={{ uri: 'https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcSF3Cj0ceIsl8A9Mh7jZjs2qKBXdQat-0ohZA&usqp=CAU' }} style={styles.marker}/>
+                <FontAwesome5 style={styles.layout} name="parachute-box" size={30} color="#6B26A0" />
     
                 <Callout onPress={() => {select(storage._id, storage.name)}}>
                   <View style={styles.callout}>
