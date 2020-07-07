@@ -67,7 +67,11 @@ export default function App() {
               key="ordersList"
               component={OrdersList}
               title="Orders List"
-              
+              onBack={()=>{
+                Actions.refresh({key: Math.random()})
+                Actions.home()
+                Actions.refresh({key: Math.random()})
+              }} back={true}
             />
 
             <Scene 
